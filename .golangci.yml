@@ -1,29 +1,53 @@
-run:
-  skip-dirs:
-    - pkg/analyzer/testdata
-
-linters-settings:
-  golint:
-    min-confidence: 0
-  goconst:
-    min-len: 2
-    min-occurrences: 3
-  misspell:
-    locale: US
-
+# options for analysis running
 linters:
-  enable-all: true
-  disable:
-  - lll
-  - prealloc
-  - dupl
-  - wsl
-  - nlreturn
-  - goerr113
-  - exhaustivestruct
-  - paralleltest
-  - testpackage
-  - gomnd
-  - gocognit
-  - nestif
-  - interfacer
+  disable-all: true
+  enable:
+    - megacheck
+    - govet
+    - revive
+    - cyclop
+    - gosec
+    - nakedret
+    - stylecheck
+    - misspell
+    - errcheck
+    - asciicheck
+    - varcheck
+    - wastedassign
+    - tparallel
+    - prealloc
+    - nestif
+    - bidichk
+    - tenv
+  fast: true
+linters-settings:
+  stylecheck:
+    checks: [ "all", "-ST1003", "-ST1023" ]    
+  cyclop:
+    max-complexity: 12
+  revive:
+  # see https://github.com/mgechev/revive#available-rules for details.
+    ignore-generated-header: true
+    exclude: "*_test.go"
+    severity: warning
+    rules:
+      - name: indent-error-flow
+        severity: warning	
+      - name: add-constant
+        severity: warning
+        arguments:
+          - maxLitCount: "3"
+            allowStrs: '""'
+            allowInts: "0,1,2"
+            allowFloats: "0.0,0.,1.0,1.,2.0,2."
+issues:
+  exclude:
+   - underscore
+   - underscores
+  exclude-rules:
+   - path: _test.go
+     linters:
+       - revive
+       - gosec
+       - errcheck
+

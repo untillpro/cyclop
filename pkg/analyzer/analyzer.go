@@ -9,6 +9,10 @@ import (
 	"golang.org/x/tools/go/analysis"
 )
 
+const (
+	defaultComplexity = 10
+)
+
 //nolint:gochecknoglobals
 var flagSet flag.FlagSet
 
@@ -17,13 +21,15 @@ var (
 	maxComplexity  int
 	packageAverage float64
 	skipTests      bool
+	skipSwitch     bool
 )
 
 //nolint:gochecknoinits
 func init() {
-	flagSet.IntVar(&maxComplexity, "maxComplexity", 10, "max complexity the function can have")
+	flagSet.IntVar(&maxComplexity, "maxComplexity", defaultComplexity, "max complexity the function can have")
 	flagSet.Float64Var(&packageAverage, "packageAverage", 0, "max average complexity in package")
 	flagSet.BoolVar(&skipTests, "skipTests", false, "should the linter execute on test files as well")
+	flagSet.BoolVar(&skipSwitch, "skipSwitch", false, "should the linter ignore Switch case")
 }
 
 func NewAnalyzer() *analysis.Analyzer {
@@ -96,8 +102,12 @@ type complexityVisitor struct {
 
 func (v *complexityVisitor) Visit(n ast.Node) ast.Visitor {
 	switch n := n.(type) {
-	case *ast.FuncDecl, *ast.IfStmt, *ast.ForStmt, *ast.RangeStmt, *ast.CaseClause, *ast.CommClause:
+	case *ast.FuncDecl, *ast.IfStmt, *ast.ForStmt, *ast.RangeStmt, *ast.CommClause:
 		v.Complexity++
+	case *ast.CaseClause:
+		if !skipSwitch {
+			v.Complexity++
+		}
 	case *ast.BinaryExpr:
 		if n.Op == token.LAND || n.Op == token.LOR {
 			v.Complexity++

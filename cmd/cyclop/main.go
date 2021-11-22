@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/bkielbasa/cyclop/pkg/analyzer"
+	"github.com/untillpro/cyclop/pkg/analyzer"
 	"golang.org/x/tools/go/analysis/singlechecker"
 )
 
