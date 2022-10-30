@@ -1,5 +1,3 @@
-github.com/untillpro/cyclop v1.2.102 h1:SlxNvtrLiXa4JJQh8MBr/vZ6CAcePswtpGSdk1WN4Tk=
-github.com/untillpro/cyclop v1.2.102/go.mod h1:zwrXNxOsvidorpYwtDiYyAaIAbdK5v3967i5aYsUuhI=
 golang.org/x/mod v0.6.0 h1:b9gGHsz9/HhJ3HF5DHQytPpuwocVTChQJK3AvoLRD5I=
 golang.org/x/mod v0.6.0/go.mod h1:4mET923SAdbXp2ki8ey+zGs1SLqsuM2Y0uvdZR/fUNI=
 golang.org/x/sys v0.1.0 h1:kunALQeHf1/185U1i0GOB/fy1IPRDDpuoOOqRReG57U=

@@ -1,11 +1,8 @@
-module github.com/untillpro/cyclop/blob/master/go.mod
+module github.com/untillpro/cyclop
 
 go 1.18
 
-require (
-	github.com/untillpro/cyclop v1.2.102
-	golang.org/x/tools v0.2.0
-)
+require golang.org/x/tools v0.2.0
 
 require (
 	golang.org/x/mod v0.6.0 // indirect
