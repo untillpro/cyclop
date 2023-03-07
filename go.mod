@@ -1,6 +1,6 @@
 module github.com/untillpro/cyclop
 
-go 1.18
+go 1.20
 
 require golang.org/x/tools v0.2.0
 
